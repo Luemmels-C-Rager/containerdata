@@ -43,7 +43,7 @@ session:
   remember_me: 1M
   cookies:
     - domain: "segmueller.org"
-      authelia_url: "https://authelia.segmueller.org"
+      authelia_url: "https://auth.segmueller.org"
       default_redirection_url: "https://segmueller.org"
 regulation:
   max_retries: 3
