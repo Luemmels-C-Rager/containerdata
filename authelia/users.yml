@@ -15,5 +15,13 @@ users:
     groups:
       - admins
       - dev
+  mak:
+    disabled: false
+    displayname: "Mäk"
+    password: "$argon2id$v=19$m=32768,t=1,p=8$eUhVT1dQa082YVk2VUhDMQ$E8QI4jHbUBt3EdsU1NFDu4Bq5jObKNx7nBKSn1EYQxk"  # Password is 'authelia'
+    email: marc.segmueller@e-brief.li
+    groups:
+      - admins
+      - dev
 ...
 # yamllint enable rule:line-length
