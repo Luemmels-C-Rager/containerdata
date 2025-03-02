@@ -1,27 +1,16 @@
-pipeline:
-  lint-authelia-config:
+steps:
+  - name: lint-authelia-config
     image: ghcr.io/yannbertrand/yamllint
     commands:
       - apk add --no-cache git
-      - git clone --depth=1 git@github.com:Luemmels-C-Rager/containerdata.git /tmp/repo
-      - yamllint -c .yamllint /tmp/repo/authelia/configuration.yaml
+      - git clone --depth=1 git@github.com:Luemmels-C-Rager/containerdata.git /workspace/repo
+      - yamllint -c .yamllint /workspace/repo/authelia/configuration.yaml
 
-  test-authelia-config:
+  - name: test-authelia-config
     image: ghcr.io/authelia/authelia:latest
     depends_on:
       - lint-authelia-config
     volumes:
-      - /tmp/repo/authelia:/config
+      - /workspace/repo/authelia:/config
     commands:
       - authelia validate-config --config /config/configuration.yaml
-
-#  deploy-authelia-config:
-#    image: woodpeckerci/plugin-podman
-#    depends_on:
-#      - test-authelia-config
-#   secrets: [SSH_PRIVATE_KEY]
-#    commands:
-#      - apk add --no-cache git openssh
-#      - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
-#      - chmod 600 /root/.ssh/id_rsa
-#      - ssh -o StrictHostKeyChecking=no podmanadmin@rpi4iot41 "cd /mnt/usb/containerdata && git pull && podman restart authelia"
