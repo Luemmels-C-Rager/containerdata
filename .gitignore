@@ -1,0 +1,11 @@
+#Git Ignore für Containerdata
+# 
+# Gitignore alles ausser .gitigrnore
+*
+!.gitignore
+# Woodpecker
+!woodpecker.yaml
+
+# Authelia Files
+!authelia/configuration.yaml
+!authelia/users.yaml
