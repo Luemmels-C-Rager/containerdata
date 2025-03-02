@@ -1,6 +1,10 @@
+when:
+  event: [push, pull_request, manual]
 steps:
   - name: lint-authelia-config
     image: ghcr.io/yannbertrand/yamllint
+    when:
+      event: [push, pull_request, manual]
     commands:
       - apk add --no-cache git
       - git clone --depth=1 git@github.com:Luemmels-C-Rager/containerdata.git /workspace/repo
@@ -10,6 +14,8 @@ steps:
     image: ghcr.io/authelia/authelia:latest
     depends_on:
       - lint-authelia-config
+    when:
+      event: [push, pull_request, manual]
     volumes:
       - /workspace/repo/authelia:/config
     commands:
