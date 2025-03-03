@@ -20,3 +20,5 @@ steps:
       - /workspace/repo/authelia:/config
     commands:
       - authelia validate-config --config /config/configuration.yaml
+
+      
