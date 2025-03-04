@@ -2,7 +2,7 @@ when:
   event: [push, pull_request, manual]
 steps:
   - name: lint-authelia-config
-    image: ghcr.io/yannbertrand/yamllint
+    image: docker.io/cytopia/yamllint:latest
     when:
       event: [push, pull_request, manual]
     commands:
