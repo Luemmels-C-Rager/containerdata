@@ -4,7 +4,7 @@
 *
 !.gitignore
 # Woodpecker
-!woodpecker.yaml
+!.woodpecker.yaml
 
 # Authelia Files
 !authelia/configuration.yaml
