@@ -1,8 +1,10 @@
-when:
-  event: [push, pull_request, manual]
+- name: test-new-authelia-config
+  image: ghcr.io/authelia/authelia:latest
+  commands:
+    - authelia validate-config --config authelia/configuration.yaml
+  when:
+    event: [push, manual]
+    paths:
+      include:
+        - authelia/configuration.yaml
 
-steps:
-  - name: validate-authelia-config
-    image: ghcr.io/authelia/authelia:latest
-    commands:
-      - authelia validate-config --config authelia/configuration.yaml
