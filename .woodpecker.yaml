@@ -1,24 +1,15 @@
 when:
   event: [push, pull_request, manual]
+
 steps:
-  - name: lint-authelia-config
-    image: docker.io/cytopia/yamllint:latest
-    when:
-      event: [push, pull_request, manual]
+#  - name: lint-authelia-config
+#    image: docker.io/cytopia/yamllint:latest
+#    commands:
+#      - yamllint -c .yamllint authelia/configuration.yaml
+
+  - name: validate-authelia-config
+    image: ghcr.io/authelia/authelia:latest
+    depends_on:
+      - lint-authelia-config
     commands:
-      - apk add --no-cache git
-      - git clone --depth=1 git@github.com:Luemmels-C-Rager/containerdata.git /workspace/repo
-      - yamllint -c .yamllint /workspace/repo/authelia/configuration.yaml
-
-  # - name: test-authelia-config
-  #  image: ghcr.io/authelia/authelia:latest
-  #  depends_on:
-  #    - lint-authelia-config
-  #  when:
-  #    event: [push, pull_request, manual]
-  #  volumes:
-  #    - /workspace/repo/authelia:/config
-  #  commands:
-  #    - authelia validate-config --config /config/configuration.yaml
-
-      
+      - authelia validate-config --config authelia/configuration.yaml
