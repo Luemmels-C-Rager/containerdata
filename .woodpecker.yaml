@@ -4,5 +4,10 @@ when:
 steps:
   - name: validate-authelia-config
     image: ghcr.io/authelia/authelia:latest
+    environment:
+      ENCRYPTION_KEY:
+        from_secret: ENCRYPTION_KEY
+      JWT_SECRET:
+        from_secret: JWT_SECRET
     commands:
       - authelia validate-config --config authelia/configuration.yaml
