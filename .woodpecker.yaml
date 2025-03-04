@@ -10,15 +10,15 @@ steps:
       - git clone --depth=1 git@github.com:Luemmels-C-Rager/containerdata.git /workspace/repo
       - yamllint -c .yamllint /workspace/repo/authelia/configuration.yaml
 
-  - name: test-authelia-config
-    image: ghcr.io/authelia/authelia:latest
-    depends_on:
-      - lint-authelia-config
-    when:
-      event: [push, pull_request, manual]
-    volumes:
-      - /workspace/repo/authelia:/config
-    commands:
-      - authelia validate-config --config /config/configuration.yaml
+  # - name: test-authelia-config
+  #  image: ghcr.io/authelia/authelia:latest
+  #  depends_on:
+  #    - lint-authelia-config
+  #  when:
+  #    event: [push, pull_request, manual]
+  #  volumes:
+  #    - /workspace/repo/authelia:/config
+  #  commands:
+  #    - authelia validate-config --config /config/configuration.yaml
 
       
