@@ -2,14 +2,7 @@ when:
   event: [push, pull_request, manual]
 
 steps:
-#  - name: lint-authelia-config
-#    image: docker.io/cytopia/yamllint:latest
-#    commands:
-#      - yamllint -c .yamllint authelia/configuration.yaml
-
   - name: validate-authelia-config
     image: ghcr.io/authelia/authelia:latest
-    depends_on:
-      - lint-authelia-config
     commands:
       - authelia validate-config --config authelia/configuration.yaml
